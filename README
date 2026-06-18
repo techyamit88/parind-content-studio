@@ -1,0 +1,56 @@
+# 🎬 ParindAI Content Automation Studio
+
+An internal, AI-driven workflow engine designed to programmatically generate educational technical content, structured learning roadmaps, and timed video production scripts.
+
+## ✨ Core Features
+* **Dual-Node AI Pipeline:** Leverages Google's Gemini 2.5 Flash to sequentially process pedagogy (Node 1) and video scriptwriting (Node 2).
+* **Automated Curriculum Design:** Forces complex technical topics into a strict, highly-retainable 3-step learning framework (Mental Model → Mechanism → Application).
+* **Intelligent Rate Limiting:** Built-in execution buffers to prevent API throttling during chained LLM generation sequences.
+* **Persistent Cloud Vault:** Direct integration with a Supabase PostgreSQL database to permanently archive generated JSON content payloads for future retrieval.
+* **Reactive Presentation:** Built on Streamlit for a fast, parameter-driven UI that renders clean, highly readable production tables.
+
+## 🏗️ Tech Stack
+* **Frontend:** Streamlit, Pandas
+* **Backend Logic:** Python
+* **Semantic Engine:** Google GenAI SDK
+* **Database / Storage:** Supabase (PostgreSQL)
+
+## ⚙️ Local Setup & Installation
+
+**1. Clone the repository**
+```bash
+git clone [https://github.com/YOUR_USERNAME/parind-content-studio.git](https://github.com/YOUR_USERNAME/parind-content-studio.git)
+cd parind-content-studio
+
+2. Install dependencies
+pip install -r requirements.txt
+3. Configure Environment Variables
+Create a .env file in the root directory. Do not commit this file to version control. ```toml
+
+AI Provider
+GEMINI_API_KEY="your_gemini_api_key"
+
+Database Vault
+SUPABASE_URL="https://your-project-ref.supabase.co"
+SUPABASE_KEY="your_anon_public_key"
+**4. Initialize the Database**
+In your Supabase project dashboard, create a table named `generated_content` with the following schema:
+* `id` (uuid, primary key)
+* `created_at` (timestamp, default: now())
+* `topic` (text)
+* `format` (text)
+* `content_data` (jsonb)
+
+**5. Launch the Studio**
+```bash
+streamlit run content_dashboard.py
+Production Deployment (Streamlit Cloud)
+Push this repository to GitHub (ensure .env is ignored via .gitignore).
+
+Log into Streamlit Community Cloud and click New app.
+
+Link your GitHub repository and set the Main file path to content_dashboard.py.
+
+Open Advanced Settings and paste the exact contents of your .env file into the Secrets block.
+
+Click Deploy.
